@@ -1,14 +1,12 @@
 echo Start script update env aml_autoscript
 sleep 5
 setenv preboot "run factory_reset_poweroff_protect;run upgrade_check;run bootmode_check;run init_display;run storeargs;run update_key;run irremote_update;run start_autoscript;run switch_bootmode;"
-setenv start_autoscript "if mmcinfo; then run start_mmc_autoscript;fi;if usb start; then run start_usb_autoscript;fi;"
+setenv start_autoscript "if usb start ; then run start_usb_autoscript;fi;if mmcinfo; then run start_mmc_autoscript;fi;"
 setenv start_mmc_autoscript "if fatload mmc 0 1020000 s905_autoscript; then autoscr 1020000; fi"
 setenv start_usb_autoscript "if fatload usb 0 1020000 s905_autoscript; then autoscr 1020000; fi"
 sleep 5
 saveenv
 sleep 5
 echo END script update env aml_autoscript
-sleep 5
-printenv
 sleep 5
 reboot
